@@ -3,7 +3,7 @@
 #include "TeleApi.h"
 #include<iostream>
 
-//×¢ÒâÌí¼Ó.lib¿â
+//æ³¨æ„æ·»åŠ .libåº“
 int main() {
 
     ULONG error = 1;
@@ -15,13 +15,13 @@ int main() {
     int i = 1;
 
     /*Regular Operation srart*/
-    InitAllModules();  //³õÊ¼»¯ËùÓĞÄ£¿é£¬ĞèÒªÔÚ³ÌĞòµÄÈë¿Ú´¦µ÷ÓÃ¸Ãº¯Êı
-    error = ResChassisAdd(RES_CHASSIS_TYPE_220, 0xC0A86CB4, &ulChassisId); //Ìí¼ÓÒ»¸öĞÍºÅÎ´RES_CHASSIS_TYPE_220, Íø¿ÚIPµØÖ·Îª192.168.108.180µÄ»úÏä
+    InitAllModules();  //åˆå§‹åŒ–æ‰€æœ‰æ¨¡å—ï¼Œéœ€è¦åœ¨ç¨‹åºçš„å…¥å£å¤„è°ƒç”¨è¯¥å‡½æ•°
+    error = ResChassisAdd(RES_CHASSIS_TYPE_220, 0xC0A86CB4, &ulChassisId); //æ·»åŠ ä¸€ä¸ªå‹å·æœªRES_CHASSIS_TYPE_220, ç½‘å£IPåœ°å€ä¸º192.168.108.180çš„æœºç®±
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
-    error = ResCardAdd(ulChassisId, ulSlotId, RES_CARD_TYPE_V8002F); //ÔÚ»úÏäµÄµÚÒ»¸ö²ÛÎ»Ìí¼ÓÒ»¿éRES_CARD_TYPE_V8002FµÄ½Ó¿Ú¿¨
+    error = ResCardAdd(ulChassisId, ulSlotId, RES_CARD_TYPE_V8002F); //åœ¨æœºç®±çš„ç¬¬ä¸€ä¸ªæ§½ä½æ·»åŠ ä¸€å—RES_CARD_TYPE_V8002Fçš„æ¥å£å¡
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
@@ -29,7 +29,7 @@ int main() {
     std::cout << "Card Added \n" << std::endl;
 
 
-    error = ResChassisConnect(ulChassisId); //ºÍÖ¸¶¨»úÏä½¨Á¢TCPÁ¬½Ó
+    error = ResChassisConnect(ulChassisId); //å’ŒæŒ‡å®šæœºç®±å»ºç«‹TCPè¿æ¥
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
@@ -37,14 +37,14 @@ int main() {
     std::cout << "Chassis connected \n" << std::endl;
 
 
-    error = ResPortReserve(ulChassisId, ulSlotId, ulPortId); //Ô¤Ô¼Ö¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏµÄµÚÒ»¸ö¶Ë¿Ú
+    error = ResPortReserve(ulChassisId, ulSlotId, ulPortId); //é¢„çº¦æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šçš„ç¬¬ä¸€ä¸ªç«¯å£
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
     std::cout << "Port Reserved \n" << std::endl;
 
-    error = TraEnablePort(ulChassisId, ulSlotId, ulPortId, TRUE); //Ê¹ÄÜÖ¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏµÚÒ»¸ö¶Ë¿ÚµÄÁ÷·¢ËÍ¹¦ÄÜ
+    error = TraEnablePort(ulChassisId, ulSlotId, ulPortId, TRUE); //ä½¿èƒ½æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šç¬¬ä¸€ä¸ªç«¯å£çš„æµå‘é€åŠŸèƒ½
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
@@ -53,13 +53,13 @@ int main() {
     /*Regular Operation end*/
 
     /*Setup start*/
-    error = TraSetPortTransmitMode(ulChassisId, ulSlotId, ulPortId, TRA_TX_MODE_CONTINUOUS, 0, 0, 0); //ÕâÖ»Ö¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏ½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄ·¢ËÍÄ£Ê½ÎªÁ¬Ğø·¢ËÍ£¬ºóÃæÈı¸ö²ÎÊı¶ÔÁ¬Ğø·¢ËÍÎŞĞ§¡£
+    error = TraSetPortTransmitMode(ulChassisId, ulSlotId, ulPortId, TRA_TX_MODE_CONTINUOUS, 0, 0, 0); //è¿™åªæŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šæ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„å‘é€æ¨¡å¼ä¸ºè¿ç»­å‘é€ï¼Œåé¢ä¸‰ä¸ªå‚æ•°å¯¹è¿ç»­å‘é€æ— æ•ˆã€‚
     /*
     mode to be select :
-    TRA_TX_MODE_CONTINUOUS±íÊ¾Á¬Ğø·¢ËÍ£¬
-    TRA_TX_MODE_SINGLE_BURST±íÊ¾µ¥´ÎÍ»·¢£¬
-    TRA_TX_MODE_MULTI_BURST±íÊ¾¶à´ÎÍ»·¢
-    TRA_TX_MODE_TIME_BURST±íÊ¾°´Ê±¼ä·¢ËÍ
+    TRA_TX_MODE_CONTINUOUSè¡¨ç¤ºè¿ç»­å‘é€ï¼Œ
+    TRA_TX_MODE_SINGLE_BURSTè¡¨ç¤ºå•æ¬¡çªå‘ï¼Œ
+    TRA_TX_MODE_MULTI_BURSTè¡¨ç¤ºå¤šæ¬¡çªå‘
+    TRA_TX_MODE_TIME_BURSTè¡¨ç¤ºæŒ‰æ—¶é—´å‘é€
     */ 
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
@@ -67,10 +67,10 @@ int main() {
     }
     std::cout << "Transmit Mode set \n" << std::endl;
 
-    error = TraSetPortScheduleMode(ulChassisId, ulSlotId, ulPortId, TRA_SCHEDULE_MODE_IFG); //ÉèÖÃÖ¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏ½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄÁ÷µ÷¶È·½Ê½
+    error = TraSetPortScheduleMode(ulChassisId, ulSlotId, ulPortId, TRA_SCHEDULE_MODE_IFG); //è®¾ç½®æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šæ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„æµè°ƒåº¦æ–¹å¼
     /*
-    TRA_SCHEDULE_MODE_IFG£¨»ùÓÚ¶Ë¿Úµ÷ËÙ£©
-    TRA_SCHEDULE_MODE_FPS£¨»ùÓÚÁ÷µ÷ËÙ£©
+    TRA_SCHEDULE_MODE_IFGï¼ˆåŸºäºç«¯å£è°ƒé€Ÿï¼‰
+    TRA_SCHEDULE_MODE_FPSï¼ˆåŸºäºæµè°ƒé€Ÿï¼‰
     */
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
@@ -80,31 +80,31 @@ int main() {
 
 
     error = TraAddStream(ulChassisId, ulSlotId, ulPortId, "s1", TRA_PRO_TYPE_IPV4, 1, TRA_LEN_TYPE_FIXED, 1000, 1000, FALSE, TRA_PAY_TYPE_CYCLE, 0x5a,
-        0, 0x000001020304, 0x000001020305, 0x01000001, 0x01000002, NULL, NULL); //Ö¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏµÚÒ»¶Ë¿ÚÏÂÌí¼ÓÒ»¸öÁ÷s1, ¸ÃÁ÷Îªipv4±¨ÎÄ£¬ ¹Ì¶¨³¤¶È£¬³¤¶ÈÎª
-	// 1000×Ö½Ú£¬Ô´MACµØÖ·Îª00-00-00-01-02-03-04£» Ä¿µÄMACµØÖ·Îª00-00-01-02-03-05; Ô´ipv4µØÖ·Îª1.0.0.1£¬Ä¿µÄIPV4µØÖ·Îª1.0.0.2¡£
+        0, 0x000001020304, 0x000001020305, 0x01000001, 0x01000002, NULL, NULL); //æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šç¬¬ä¸€ç«¯å£ä¸‹æ·»åŠ ä¸€ä¸ªæµs1, è¯¥æµä¸ºipv4æŠ¥æ–‡ï¼Œ å›ºå®šé•¿åº¦ï¼Œé•¿åº¦ä¸º
+	// 1000å­—èŠ‚ï¼ŒæºMACåœ°å€ä¸º00-00-00-01-02-03-04ï¼› ç›®çš„MACåœ°å€ä¸º00-00-01-02-03-05; æºipv4åœ°å€ä¸º1.0.0.1ï¼Œç›®çš„IPV4åœ°å€ä¸º1.0.0.2ã€‚
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
 
-    error = TraEnableStream("s1", TRUE); //Ê¹ÄÜs1Á÷
+    error = TraEnableStream("s1", TRUE); //ä½¿èƒ½s1æµ
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
 
-    error = TraSetEthernetPortRate(ulChassisId, ulSlotId, ulPortId, TRA_RATE_UNIT_TYPE_FPS, 200000); //ÉèÖÃÖ¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏ½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄÁ÷·¢ËÍËÙÂÊÎª200000FPS
+    error = TraSetEthernetPortRate(ulChassisId, ulSlotId, ulPortId, TRA_RATE_UNIT_TYPE_FPS, 200000); //è®¾ç½®æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šæ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„æµå‘é€é€Ÿç‡ä¸º200000FPS
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
-    error = StaSelectStream(ulChassisId, ulSlotId, ulPortId, "s1"); //°ÑÁ÷s1¹ÒÔÚÖ¸¶¨»úÏäµÚÒ»²ÛÎ»ÏÂµÚÒ»¶Ë¿ÚÏÂ½øĞĞÍ³¼Æ
+    error = StaSelectStream(ulChassisId, ulSlotId, ulPortId, "s1"); //æŠŠæµs1æŒ‚åœ¨æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸‹ç¬¬ä¸€ç«¯å£ä¸‹è¿›è¡Œç»Ÿè®¡
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
     }
 
-    error = StaStartPort(ulChassisId, ulSlotId, ulPortId); //¿ªÊ¼Ö¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏ½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄÍ³¼Æ
+    error = StaStartPort(ulChassisId, ulSlotId, ulPortId); //å¼€å§‹æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šæ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„ç»Ÿè®¡
     if (error != 0) {
         std::cout << "Error Code: " << error << std::endl;
         exit(error);
@@ -112,7 +112,7 @@ int main() {
     TraStart();
     Sleep(1000);
     for (int i = 2; i <= 10; i++) {
-        error = StaGetPortData(ulChassisId, ulSlotId, ulPortId, STA_MEA_TX_FPS, &frameRate); //»ñÈ¡Ö¸¶¨»úÏäµÚÒ»²ÛÎ»ÉÏ½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄ·¢ËÍµÄÁ÷µÄÖ¡ÊıÍ³¼Æ£¬½á¹ûÔÚframeRateÖĞ
+        error = StaGetPortData(ulChassisId, ulSlotId, ulPortId, STA_MEA_TX_FPS, &frameRate); //è·å–æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½ä¸Šæ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„å‘é€çš„æµçš„å¸§æ•°ç»Ÿè®¡ï¼Œç»“æœåœ¨frameRateä¸­
         if (error != 0) {
             std::cout << "Error Code: " << error << std::endl;
             exit(error);
@@ -122,19 +122,20 @@ int main() {
         last = frameRate;
 
         // Dynamically adjust frame rate 
-        error = TraSetEthernetPortRate(ulChassisId, ulSlotId, ulPortId, TRA_RATE_UNIT_TYPE_FPS, i*200000); //ÉèÖÃÖ¸¶¨»úÏäµÚÒ»²ÛÎ»½Ó¿Ú¿¨µÄµÚÒ»¶Ë¿ÚµÄÁ÷·¢ËÍËÙÂÊÎªi*200000
+        error = TraSetEthernetPortRate(ulChassisId, ulSlotId, ulPortId, TRA_RATE_UNIT_TYPE_FPS, i*200000); //è®¾ç½®æŒ‡å®šæœºç®±ç¬¬ä¸€æ§½ä½æ¥å£å¡çš„ç¬¬ä¸€ç«¯å£çš„æµå‘é€é€Ÿç‡ä¸ºi*200000
         if (error != 0) {
             std::cout << "Error Code: " << error << std::endl;
             exit(error);
         }
         Sleep(1000);
     }
-    TraStop(); //Í£Ö¹Á÷·¢ËÍ
-    StaStopPort(ulChassisId, ulSlotId, ulPortId); //Í£Ö¹Ö¸¶¨¶Ë¿ÚµÄÍ³¼Æ
+    TraStop(); //åœæ­¢æµå‘é€
+    StaStopPort(ulChassisId, ulSlotId, ulPortId); //åœæ­¢æŒ‡å®šç«¯å£çš„ç»Ÿè®¡
 
     // remember to release the resources
-    TraRemoveStream("s1"); //É¾³ıÖ¸¶¨µÄÁ÷
-    ResPortRelease(ulChassisId, ulSlotId, ulPortId); //ÊÍ·ÅÖ¸¶¨µÄ½Ó¿Ú¿¨µÄ¶Ë¿Ú
-	DeleteAllModules();//ÊÍ·ÅËùÓĞ×ÊÔ´
+    TraRemoveStream("s1"); //åˆ é™¤æŒ‡å®šçš„æµ
+    ResPortRelease(ulChassisId, ulSlotId, ulPortId); //é‡Šæ”¾æŒ‡å®šçš„æ¥å£å¡çš„ç«¯å£
+	DeleteAllModules();//é‡Šæ”¾æ‰€æœ‰èµ„æº
     return 0;
 }
+
